@@ -12,6 +12,28 @@ Will present you your `/proc/meminfo` in a more clean/better way.
 
 <br><br>
 
+# Index
+* [News](#news)
+* [Download](#download)
+* [Command Line Parameters](#command-line-parameters)
+    * [Numbers](#numbers)
+    * [Base](#base)
+    * [Unit/Index](#unit--index)
+* [Example Screenshots](#example-screenshots)
+* [Notes](#notes)
+* [Features / TODO](#features--todo)
+* [Contact](#contact)
+* [Copyright and License](#copyright-and-license)
+
+<br><br><br>
+
+## News
+* \[**2026-09-20**\] Latest update (v**2.1.3**);
+* \[**2026-09-17**\] (Re-)Created this utility!
+
+
+<br><br><br>
+
 ## Download
 Implemented in plain Vanilla JavaScript, **without any dependencies**.
 
