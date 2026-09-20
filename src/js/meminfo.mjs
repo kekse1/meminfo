@@ -4,7 +4,7 @@
 /*
  * Copyright (c) Sebastian Kucharczyk <kuchen@kekse.biz>
  * https://kekse.biz/ https://github.com/kekse1/meminfo/
- * v2.1.2
+ * v2.1.3
  */
 
 /*
@@ -18,14 +18,11 @@
  *
  *
  *
+ * maybe interesting for you: the better `const PRESETS{}`.
+ *
  *
  *
  * TODO * the `meminfo.help()` `--help` output needs to be done.
- *
- * TODO * Math.size() => BigInt support! PLEASE CALCULATE WITH IT, NO CAST!!1 ...
- *		maybe first check if below Number.MAX_SAFE_INTEGER for current version,
- *		... etc.. THINK ABOUT IT: BigInt won't allow floating point results..
- *		and that's BAD for real base conversions...! :-/
  *
  *
  *
@@ -60,7 +57,17 @@ if(!globalThis[kekse1])
 	Reflect.defineProperty(Math, 'size', { value: (_value, _options) => {
 		if(typeof _value === 'bigint')
 		{
-			throw new Error('todo');
+			//
+			// converting directly with BigInt is not so good,
+			// since it doesn't support floating point results
+			// (which occure often here).
+			//
+			if(_value > BigInt(Number.MAX_SAFE_INTEGER))
+			{
+				throw new Error('The _value (BigInt) is too high (see `Number.MAX_SAFE_INTEGER`)');
+			}
+			
+			_value = Number(_value);
 		}
 		else if(!Number.isFinite(_value))
 		{
@@ -533,7 +540,17 @@ const
 const
 	DEFAULT_START = true;
 const
-	PRESETS = [ 'MEM', 'SWAP' ];
+	PRESETS = {
+		'MEM': [
+			'MemTotal',
+			'MemFree',
+			'MemAvailable'
+		],
+		'SWAP': [
+			'SwapTotal',
+			'SwapFree'
+		]
+	};
 var
 	ERROR = 0,
 	ARGS = null;
@@ -581,7 +598,8 @@ meminfo.getParameters = () => {
 	const	presets = [],
 		result = {},
 		fields = [];
-	var	item,
+	var	pause = false,
+		item,
 		key;
 
 	for(var i = 2; i < process.argv.length; ++i)
@@ -599,11 +617,15 @@ meminfo.getParameters = () => {
 	{
 		if(process.argv[i] === '--')
 		{
-			break;
+			pause = !pause;
+		}
+		else if(pause)
+		{
+			continue;
 		}
 		else if(process.argv[i] === '+')
 		{
-			for(const pre of PRESETS)
+			for(const pre in PRESETS)
 			{
 				if(!presets.includes(pre))
 				{
@@ -760,14 +782,14 @@ meminfo.getParameters = () => {
 		}
 		else if(process.argv[i].isUpperCase)
 		{
-			if(!PRESETS.includes(process.argv[i]))
+			if(!PRESETS[process.argv[i]])
 			{
 				console.error('Preset `' +
 					process.argv[i] +
 					'` is unknown!');
 				return process.exit(2);
 			}
-			
+
 			if(!presets.includes(process.argv[i]))
 			{
 				presets[p++] = process.argv[i];
@@ -917,6 +939,11 @@ meminfo.filterData = (_data, _fields, _presets) => {
 	{
 		return { ... _data };
 	}
+	
+	for(var i = 0; i < _fields.length; ++i)
+	{
+		_fields[i] = _fields[i].toLowerCase();
+	}
 
 	const	lower = new Set(),
 		invalid = [],
@@ -976,43 +1003,20 @@ meminfo.filterData.applyPresets = (_fields, _presets) => {
 	{
 		return _fields;
 	}
+	
+	var preset; for(const pre of _presets)
+	{
+		preset = PRESETS[pre];
 
-	if(_presets.includes('SWAP'))
-	{
-		if(!_fields.includes('SwapFree'))
+		for(const p of preset)
 		{
-			_fields.unshift('SwapFree');
-		}
-		
-		if(!_fields.includes('SwapTotal'))
-		{
-			_fields.unshift('SwapTotal');
+			if(!_fields.includes(p))
+			{
+				_fields.push(p);
+			}
 		}
 	}
-	
-	if(_presets.includes('MEM'))
-	{
-		if(!_fields.includes('MemAvailable'))
-		{
-			_fields.unshift('MemAvailable');
-		}
-		
-		if(!_fields.includes('MemFree'))
-		{
-			_fields.unshift('MemFree');
-		}
 
-		if(!_fields.includes('MemTotal'))
-		{
-			_fields.unshift('MemTotal');
-		}
-	}
-	
-	for(var i = 0; i < _fields.length; ++i)
-	{
-		_fields[i] = _fields[i].toLowerCase();
-	}
-	
 	return _fields;
 };
 

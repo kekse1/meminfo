@@ -19,7 +19,7 @@ in the script); they still need some documentation in the
 ## Download
 Implemented in plain Vanilla JavaScript, **without any dependencies**.
 
-* [Version v**2.1.2**](./src/js/meminfo.mjs) (updated **2026-09-19**);
+* [Version v**2.1.3**](./src/js/meminfo.mjs) (updated **2026-09-20**);
 
 <br><br>
 
@@ -48,6 +48,10 @@ directly (without any space or stuff):
 **Upper Case** parameters are "**presets**". You can define more than one.
 They set combinations of `/proc/meminfo` fields. See also the `const PRESETS[]`
 (currently supported `MEM` and `SWAP`).
+
+> [!TIP]
+> Now (since v**2.1.3**) you can directly adjust all the presets,
+> see the `const PRESETS{}` (now an Object w/ adjustable entries).
 
 **All other parameters** define fields of `/proc/meminfo`. They can also be pure lower case;
 if you define non-existing ones, it'll (also) inform you about your mistake.
