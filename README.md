@@ -18,7 +18,7 @@ Will present you your `/proc/meminfo` in a more clean/better way.
 * [Command Line Parameters](#command-line-parameters)
     * [Numbers](#numbers)
     * [Base](#base)
-    * [Unit/Index](#unit--index)
+    * [Unit / Index](#unit--index)
 * [Example Screenshots](#example-screenshots)
 * [Notes](#notes)
 * [Features / TODO](#features--todo)
@@ -108,7 +108,7 @@ The only limit is `Math.abs() > 1`.
 
 <br>
 
-### Unit or Index
+### Unit / Index
 Normally the chosen unit is adjusted by the size.
 
 You can fix the output unit via `--unit`. Either with one character, whereas
