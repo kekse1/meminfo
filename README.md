@@ -4,10 +4,6 @@
 # `meminfo`
 Will present you your `/proc/meminfo` in a more clean/better way.
 
-There are also some (command line) options (plus some `const DEFAULT*`
-in the script); they still need some documentation in the
-`meminfo.help()` `--help / -? / -h` function!
-
 <br>
 
 > [!NOTE]
@@ -23,7 +19,7 @@ Implemented in plain Vanilla JavaScript, **without any dependencies**.
 
 <br><br>
 
-## Command Line arguments
+## Command Line Parameters
 There are few supported **argv[] parameters** (beneath some `const DEFAULT_*`
 switches in the code); they still need a documentation (in the `meminfo.help()`
 function, and in here):
