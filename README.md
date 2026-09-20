@@ -6,7 +6,7 @@ Will present you your `/proc/meminfo` in a more clean/better way.
 
 There are also some (command line) options (plus some `const DEFAULT*`
 in the script); they still need some documentation in the
-`meminfo.syntax()` `--help / -? / -h` function!
+`meminfo.help()` `--help / -? / -h` function!
 
 <br>
 
