@@ -118,6 +118,21 @@ from `mem` to `meminfo` now).
 > My [old, original code base](./src/js/v1/mem.js) is still available here,
 > including the [**older** screenshot](./img/mem.png).
 
+<br><br>
+
+## Notes
+BTW., the original field order of `/proc/meminfo` will always be preserved,
+no matter in which order you define the fields or presets.
+
+<br><br>
+
+## Features / TODO
+**TODO**: Here'll be a list of all features (and TODO items).
+
+<br>
+
+- [ ] The `meminfo.help()` function is still missing.
+
 <br><br><br>
 
 # Contact
