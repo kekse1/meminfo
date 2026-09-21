@@ -28,7 +28,7 @@ Will present you your `/proc/meminfo` in a more clean/better way.
 <br><br><br>
 
 ## News
-* \[**2026-09-20**\] Latest update (v**2.1.4**);
+* \[**2026-09-21**\] Latest update (v**2.1.4**);
 * \[**2026-09-17**\] (Re-)Created this utility!
 
 
@@ -37,7 +37,7 @@ Will present you your `/proc/meminfo` in a more clean/better way.
 ## Download
 Implemented in plain Vanilla JavaScript, **without any dependencies**.
 
-* [Version v**2.1.4**](./src/js/meminfo.mjs) (updated **2026-09-20**);
+* [Version v**2.1.4**](./src/js/meminfo.mjs) (updated **2026-09-21**);
 
 <br>
 
