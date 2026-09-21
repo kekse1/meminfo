@@ -4,7 +4,7 @@
 /*
  * Copyright (c) Sebastian Kucharczyk <kuchen@kekse.biz>
  * https://kekse.biz/ https://github.com/kekse1/meminfo/
- * v2.1.3
+ * v2.1.4
  */
 
 /*
@@ -309,7 +309,7 @@ if(!globalThis[kekse1])
 			return null;
 		}
 
-		if((_unit = _unit.substr(0, 2).toLowerCase()).includes('i'))
+		if(_unit[1].toLowerCase() === 'i')
 		{
 			base = 1024;
 		}
