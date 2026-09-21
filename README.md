@@ -39,6 +39,12 @@ Implemented in plain Vanilla JavaScript, **without any dependencies**.
 
 * [Version v**2.1.3**](./src/js/meminfo.mjs) (updated **2026-09-20**);
 
+<br>
+
+> [!TIP]
+> I'm also working on a [`bash` version](./src/sh/meminfo.sh).
+> But it's still pure **TODO**.
+
 <br><br>
 
 ## Command Line Parameters
