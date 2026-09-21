@@ -1,0 +1,2 @@
+awk: Kommandozeile:1: BEGIN { print () }
+awk: Kommandozeile:1:                ^ syntax error

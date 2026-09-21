@@ -11,42 +11,42 @@
 #
 
 #
-_calc()
+CALC()
 {
 	awk "BEGIN { print ($*) }"
 }
 
-_compare()
+CMP()
 {
 	(( $(awk "BEGIN { print ($*) }") ))
 }
 
-_gt()
+GT()
 {
 	_compare "$1 > $2"
 }
 
-_ge()
+GE()
 {
 	_compare "$1 >= $2"
 }
 
-_lt()
+LT()
 {
 	_compare "$1 < $2"
 }
 
-_le()
+LE()
 {
 	_compare "$1 <= $2"
 }
 
-_eq()
+EQ()
 {
 	_compare "$1 == $2"
 }
 
-_ne()
+NE()
 {
 	_compare "$1 != $2"
 }
@@ -55,7 +55,7 @@ _ne()
 __1000=( Bytes KB MB GB TB PB EB ZB YB )
 __1024=( Bytes KiB MiB GiB TiB PiB EiB ZiB YiB )
 
-byte()
+SIZE()
 {
 	return 255
 }
