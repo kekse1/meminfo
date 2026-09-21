@@ -11,18 +11,44 @@
 #
 
 #
-___="`which bc 2>/dev/null`"
-
-if [[ $? -ne 0 ]]; then
-	echo -e "[error] The \`bc\` utility couldn't be found!" >&2
-	return 123
-fi
-
-calculate()
+_calc()
 {
-	# using `bc` (see ${___});
-	echo -e "[todo] calculate()" >&2
-	return 255
+	awk "BEGIN { print ($*) }"
+}
+
+_compare()
+{
+	(( $(awk "BEGIN { print ($*) }") ))
+}
+
+_gt()
+{
+	_compare "$1 > $2"
+}
+
+_ge()
+{
+	_compare "$1 >= $2"
+}
+
+_lt()
+{
+	_compare "$1 < $2"
+}
+
+_le()
+{
+	_compare "$1 <= $2"
+}
+
+_eq()
+{
+	_compare "$1 == $2"
+}
+
+_ne()
+{
+	_compare "$1 != $2"
 }
 
 #
@@ -115,7 +141,8 @@ __meminfoGetParameters()
 #
 meminfo2()
 {
-	echo -e "[todo] meminfo{,2}()" >&2
+	# "2"?!?
+	echo -e "[todo] meminfo2()" >&2
 	return 255
 }
 
