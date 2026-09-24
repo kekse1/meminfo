@@ -137,6 +137,8 @@ from `mem` to `meminfo` now).
 
 ![v2](./img/meminfo.png)
 
+![v2 HELP](./img/meminfo.help.png)
+
 <br>
 
 > [!NOTE]
