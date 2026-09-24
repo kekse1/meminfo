@@ -4,7 +4,6 @@
 /*
  * Copyright (c) Sebastian Kucharczyk <kuchen@kekse.biz>
  * https://kekse.biz/ https://github.com/kekse1/meminfo/
- * v2.1.4
  */
 
 /*
@@ -29,6 +28,9 @@
  */
 
 //
+const
+	VERSION = '2.2.0';
+
 const
 	DEFAULT_BASE = 1024,
 	DEFAULT_PRECISION = 4,
@@ -75,7 +77,7 @@ if(!globalThis[kekse1])
 		}
 
 		const	negative = (_value < 0),
-			UNIT = Math.size.units;
+			UNIT = Math.size.unit;
 		_value = Math.abs(_value);
 		
 		if(!_value)
@@ -92,14 +94,15 @@ if(!globalThis[kekse1])
 			{
 				_options = {};
 			}
-			
+
 			if(typeof _options.unit === 'string')
 			{
 				const unit = Math.size.findUnit(_options.unit);
 				
 				if(unit === null)
 				{
-					throw new Error('Unknown unit `' + unit + '`.');
+					throw new Error('Unknown unit `' +
+						_options.unit + '`.');
 				}
 				
 				_options.index = unit[0];
@@ -259,7 +262,7 @@ if(!globalThis[kekse1])
 	Math.size.isRegularBase = (_base) => (
 		_base === 1000 || _base === 1024);
 
-	Math.size.units = [
+	Math.size.unit = [
 		{ 1000: 'Bytes', 1024: 'Bytes' },
 		{ 1000: 'KB', 1024: 'KiB' },
 		{ 1000: 'MB', 1024: 'MiB' },
@@ -270,6 +273,21 @@ if(!globalThis[kekse1])
 		{ 1000: 'ZB', 1024: 'ZiB' },
 		{ 1000: 'YB', 1024: 'YiB' }
 	];
+	
+	Reflect.defineProperty(Math.size, 'units', { get: () => {
+		const unit = Math.size.unit;
+		const result = {
+			1000: new Array(unit.length),
+			1024: new Array(unit.length)	};
+			
+		for(var i = 0; i < unit.length; ++i)
+		{
+			result[1000][i] = unit[i][1000];
+			result[1024][i] = unit[i][1024];
+		}
+
+		return result;
+	}});
 
 	Math.size.findUnit = (_unit) => {
 		if(typeof _unit !== 'string')
@@ -282,7 +300,7 @@ if(!globalThis[kekse1])
 			return [ 0, 1000 ];
 		}
 
-		const	UNIT = Math.size.units;
+		const	UNIT = Math.size.unit;
 		var	base;
 
 		if(_unit.length === 1)
@@ -560,6 +578,7 @@ const	meminfo = {};
 export	default meminfo;
 import	fs from 'node:fs';
 import	os from 'node:os';
+import	path from 'node:path';
 
 //
 meminfo.size = (_value, _options = ARGS) => Math.
@@ -575,13 +594,30 @@ meminfo.size = (_value, _options = ARGS) => Math.
 		}, _options));
 
 //
+//[ 'prec', 'precision', 'base', 'radix', 'locale', 'show', 'unit', 'index' ];
+//
 meminfo.help = (_exit = null) => {
-	//
-	//TODO/see also `meminfo.getParameters()`!1
-	//
-	throw new Error('todo');
+	console.log('  meminfo  v' + VERSION + '\t\t' +
+		'  (c) kuchen@kekse.biz' + os.EOL);
+	const base = path.basename(import.meta.filename);
+	console.log('\tSyntax: ' + base + ' [ ... ]' + os.EOL);
+	const long = meminfo.help.long();
+
+	for(const idx in long)
+	{
+		console.log('\t\t' + idx + long[idx]);
+	}
 	
-	//
+	console.log(os.EOL + 'Possible `--unit` w/ `--index` (base 1024 / 1000):' + os.EOL);
+	const units = meminfo.help.units();
+	
+	for(const unit of units)
+	{
+		console.log('\t' + unit);
+	}
+	
+	console.log();
+
 	if(Number.isFinite(_exit))
 	{
 		process.exit(Math.trunc(Math.
@@ -589,10 +625,67 @@ meminfo.help = (_exit = null) => {
 	}
 };
 
+meminfo.help.units = () => {
+	const	unit = Math.size.unit,
+		result = new Array(unit.length);
+	
+	result[0] = '[0] Bytes';
+
+	for(var i = 1; i < unit.length; ++i)
+	{
+		result[i] = '[' + i + '] ' + unit[i][1024] + ' / ' + unit[i][1000];
+	}
+
+	return result;
+};
+
+meminfo.help.long = () => {
+	const	long = meminfo.getParameters.LONG,
+		result = {};
+	var	maxValueLen = 0,
+		maxKeyLen = 0,
+		len;
+		
+	for(const idx in long)
+	{
+		if(long[idx] === null)
+		{
+			long[idx] = 'null';
+		}
+		else
+		{
+			long[idx] = long[idx].toString();
+		}
+	}
+	
+	for(const idx in long)
+	{
+		if(((len = idx.length + 6)) > maxKeyLen)
+		{
+			maxKeyLen = len;
+		}
+		
+		if((len = long[idx].length) > maxValueLen)
+		{
+			maxValueLen = len;
+		}
+	}
+	
+	const keys = Object.keys(long).sort();
+
+	for(const key of keys)
+	{
+		result[('--' + key + '    ').
+			padStart(maxKeyLen, ' ')] =
+				long[key].padStart(
+					maxValueLen, ' ');
+	}
+
+	return result;
+};
+
 //
-// [ 'prec', 'precision', 'base', 'radix', 'locale', 'show', 'unit', 'index' ];
-//
-//TODO/HELP @ `meminfo.help()`!1
+// see `meminfo.getParameters.LONG{}` (below); ...
 //
 meminfo.getParameters = () => {
 	const	presets = [],
@@ -833,6 +926,17 @@ meminfo.getParameters = () => {
 	return Object.assign(result, { presets, fields });
 };
 
+meminfo.getParameters.LONG = {
+	'precision': DEFAULT_PRECISION,
+	'base': DEFAULT_BASE,
+	'radix': DEFAULT_RADIX,
+	'locale': DEFAULT_RADIX,
+	'show': DEFAULT_SHOW,
+	'unit': null,
+	'index': null
+};
+
+//
 meminfo.getData = (_errors = true) => {
 	var data;
 

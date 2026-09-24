@@ -28,6 +28,7 @@ Will present you your `/proc/meminfo` in a more clean/better way.
 <br><br><br>
 
 ## News
+* \[**2026-09-24**\] 'Final' update (v**2.2.0**), now w/ `--help/-?/-h`! ;-)
 * \[**2026-09-21**\] Latest update (v**2.1.4**);
 * \[**2026-09-17**\] (Re-)Created this utility!
 
@@ -37,7 +38,7 @@ Will present you your `/proc/meminfo` in a more clean/better way.
 ## Download
 Implemented in plain Vanilla JavaScript, **without any dependencies**.
 
-* [Version v**2.1.4**](./src/js/meminfo.mjs) (updated **2026-09-21**);
+* [Version v**2.2.0**](./src/js/meminfo.mjs) (updated **2026-09-24**);
 
 <br>
 
@@ -74,7 +75,7 @@ They set combinations of `/proc/meminfo` fields. See also the `const PRESETS[]`
 (currently supported `MEM` and `SWAP`).
 
 > [!TIP]
-> Now (since v**2.1.3**) you can directly adjust all the presets,
+> Since v**2.1.3** you can directly adjust all the presets,
 > see the `const PRESETS{}` (now an Object w/ adjustable entries).
 
 **All other parameters** define fields of `/proc/meminfo`. They can also be pure lower case;
