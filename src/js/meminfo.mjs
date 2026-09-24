@@ -8,7 +8,7 @@
 
 //
 const
-	VERSION = '2.2.0';
+	VERSION = '2.2.1';
 
 const
 	DEFAULT_BASE = 1024,
@@ -608,12 +608,17 @@ meminfo.help = (_exit = null) => {
 meminfo.help.units = () => {
 	const	unit = Math.size.unit,
 		result = new Array(unit.length);
+	var	char;
 	
 	result[0] = '[0] Bytes';
 
 	for(var i = 1; i < unit.length; ++i)
 	{
-		result[i] = '[' + i + '] ' + unit[i][1024] + ' / ' + unit[i][1000];
+		char = unit[i][1000][0];
+		result[i] = '[' + i + '] ' + unit[i][1024] +
+			' / ' + char.toUpperCase() +
+			'   //   ' + unit[i][1000] + ' / ' +
+			char.toLowerCase();
 	}
 
 	return result;
