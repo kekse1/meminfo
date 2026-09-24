@@ -6,27 +6,6 @@
  * https://kekse.biz/ https://github.com/kekse1/meminfo/
  */
 
-/*
- * this is the new SECOND version.
- *
- * primary goal was to transform the output of `cat /proc/meminfo`
- * into something "better", plus some additional options.
- *
- * as usual, all plain vanilla, without any dependencies.
- * so it runs 'as is'!
- *
- *
- *
- * maybe interesting for you: the better `const PRESETS{}`.
- *
- *
- *
- * TODO * the `meminfo.help()` `--help` output needs to be done.
- *
- *
- *
- */
-
 //
 const
 	VERSION = '2.2.0';
