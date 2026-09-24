@@ -617,7 +617,7 @@ meminfo.help.units = () => {
 		char = unit[i][1000][0];
 		result[i] = i + '      ' + unit[i][1024] +
 			' / ' + char.toUpperCase() +
-			'    ' + unit[i][1000] + ' / ' +
+			'      ' + unit[i][1000] + ' / ' +
 			char.toLowerCase();
 	}
 
