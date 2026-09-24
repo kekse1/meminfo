@@ -50,8 +50,8 @@ Implemented in plain Vanilla JavaScript, **without any dependencies**.
 
 ## Command Line Parameters
 There are few supported **argv[] parameters** (beneath some `const DEFAULT_*`
-switches in the code); they still need a documentation (in the `meminfo.help()`
-function, and in here):
+switches in the code); since v**2.2.0** the `--help / -? / -h` also works (where
+you can also see the current DEFAULT values).
 
 * `--prec[ision]`
 * `--base`
@@ -151,12 +151,10 @@ no matter in which order you define the fields or presets.
 
 <br><br>
 
-## Features / TODO
+
+<!--## Features / TODO
 **TODO**: Here'll be a list of all features (and TODO items).
-
-<br>
-
-- [ ] The `meminfo.help()` function is still missing.
+  -->
 
 <br><br><br>
 
