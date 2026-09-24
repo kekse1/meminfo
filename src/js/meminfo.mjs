@@ -578,8 +578,9 @@ meminfo.size = (_value, _options = ARGS) => Math.
 meminfo.help = (_exit = null) => {
 	console.log('  meminfo  v' + VERSION + '\t\t' +
 		'  (c) kuchen@kekse.biz' + os.EOL);
-	const base = path.basename(import.meta.filename);
-	console.log('\tSyntax: ' + base + ' [ ... ]' + os.EOL);
+	const base = path.basename(process.argv[1]);//import.meta.filename);
+	console.log('\tSyntax: ' + base + ' [ ... fields / presets / `+` ]' +
+		' ( `@` / `=` ... )' + os.EOL);
 	const long = meminfo.help.long();
 
 	for(const idx in long)
