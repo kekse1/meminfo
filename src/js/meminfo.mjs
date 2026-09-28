@@ -8,7 +8,7 @@
 
 //
 const
-	VERSION = '2.2.1';
+	VERSION = '2.2.2';
 
 const
 	DEFAULT_BASE = 1024,
@@ -553,7 +553,16 @@ var
 	ARGS = null;
 
 //
-const	meminfo = {};
+const	meminfo = (_errors = true) => {
+		ARGS = meminfo.getParameters();
+		const data = meminfo.filterData(
+			meminfo.getData(_errors),
+			ARGS.fields, ARGS.presets);
+		const lines = meminfo.printData(meminfo.
+			prepareData(data));
+		return { data, lines, parameter: ARGS };
+	};
+
 export	default meminfo;
 import	fs from 'node:fs';
 import	os from 'node:os';
@@ -997,13 +1006,13 @@ meminfo.prepareData = (_data) => {
 	}
 
 	maxKey += 2;
-	const result = {};
+	const	result = [];
+	var	index = 0;
 	
 	for(const idx in _data)
 	{
-		result[(idx + ': ').padEnd(maxKey, ' ')] =
-			_data[idx].padStart(
-				maxValue, ' ');
+		result[index++] = (idx + ': ').padEnd(maxKey, ' ') +
+			_data[idx].padStart(maxValue, ' ');
 	}
 
 	return result;
@@ -1110,41 +1119,20 @@ meminfo.filterData.applyPresets = (_fields, _presets) => {
 };
 
 meminfo.printData = (_data) => {
-	var result = 0;
-
-	for(const idx in _data)
-	{
-		console.log(
-			idx +
-			_data[idx]);
-		++result;
-	}
-	
-	return result;
+	console.log(_data.join(os.EOL));
+	return _data;
 };
 
 //
-meminfo.handle = (_errors = true) => {
-	ARGS = meminfo.getParameters();
-	const data = meminfo.filterData(
-		meminfo.getData(_errors),
-		ARGS.fields, ARGS.presets);
-	const result = meminfo.
-		prepareData(data);
-	meminfo.printData(result);
-	return data;
-};
-
-meminfo.start = (_errors = true, _exit = true) => {
-	const result = meminfo.handle(_errors);
+meminfo.start = (_errors = true, _exit = false) => {
+	const result = meminfo(_errors);
 	if(_exit) process.exit(ERROR);
 	return result;
 };
 
-//
 if(DEFAULT_START)
 {
-	meminfo.start();
+	meminfo.start(true, true);
 }
 
 //
