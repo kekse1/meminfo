@@ -28,6 +28,7 @@ Will present you your `/proc/meminfo` in a more clean/better way.
 <br><br><br>
 
 ## News
+* \[**2026-09-28**\] And now here's also the newest [**screenshot** to be found](#example-screenshot);
 * \[**2026-09-24**\] 'Final' update (v**2.2.1**);
 * \[**2026-09-21**\] Latest update (v**2.1.4**);
 * \[**2026-09-17**\] (Re-)Created this utility!
