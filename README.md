@@ -135,15 +135,7 @@ This is my newest version, which was intended to be a better
 replacement for `cat /proc/meminfo` **only** (so it's renamed
 from `mem` to `meminfo` now).
 
-![v2](./img/meminfo.png)
-
-<!--![v2 HELP](./img/meminfo.help.png)-->
-
-<br>
-
-> [!NOTE]
-> My [old, original code base](./src/js/v1/mem.js) is still available here,
-> including the [**older** screenshot](./img/mem.png).
+![v2](./img/example.png)
 
 <br><br>
 
