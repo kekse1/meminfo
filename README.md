@@ -19,8 +19,8 @@ Will present you your `/proc/meminfo` in a more clean/better way.
     * [Numbers](#numbers)
     * [Base](#base)
     * [Unit / Index](#unit--index)
-* [Example Screenshots](#example-screenshots)
 * [Notes](#notes)
+* [Example Screenshot](#example-screenshot)
 * [Features / TODO](#features--todo)
 * [Contact](#contact)
 * [Copyright and License](#copyright-and-license)
@@ -28,7 +28,7 @@ Will present you your `/proc/meminfo` in a more clean/better way.
 <br><br><br>
 
 ## News
-* \[**2026-09-24**\] 'Final' update (v**2.2.1**), now w/ `--help / -? / -h`!
+* \[**2026-09-24**\] 'Final' update (v**2.2.1**);
 * \[**2026-09-21**\] Latest update (v**2.1.4**);
 * \[**2026-09-17**\] (Re-)Created this utility!
 
@@ -128,20 +128,16 @@ the `--index` to set a special (division) index. Like `--index 1` for K(i)B.
 
 <br><br>
 
-## Example Screenshots
-Here are example screenshots of my utility.
-
-This is my newest version, which was intended to be a better
-replacement for `cat /proc/meminfo` **only** (so it's renamed
-from `mem` to `meminfo` now).
-
-![v2](./img/example.png)
-
-<br><br>
-
 ## Notes
 BTW., the original field order of `/proc/meminfo` will always be preserved,
 no matter in which order you define the fields or presets.
+
+<br><br>
+
+## Example Screenshot
+Got **one example** screenshot atm.. the newest [v**2.2.1**](#download):
+
+![v2](./img/example.png)
 
 <br><br>
 
