@@ -13,7 +13,7 @@ Will present you your `/proc/meminfo` in a more clean/better way.
 <br><br>
 
 # Index
-* [News](#news)
+<!--* [News](#news)-->
 * [Download](#download)
 * [Command Line Parameters](#command-line-parameters)
     * [Numbers](#numbers)
@@ -27,13 +27,15 @@ Will present you your `/proc/meminfo` in a more clean/better way.
 
 <br><br><br>
 
+<!--
 ## News
 * \[**2026-09-28**\] Newest version is the v**2.2.2** now.
 * \[**2026-09-28**\] And now here's also the newest [**screenshot** to be found](#example-screenshot);
 * \[**2026-09-17**\] (Re-)Created this utility!
 
-
 <br><br><br>
+  -->
+<br><br>
 
 ## Download
 Implemented in plain Vanilla JavaScript, **without any dependencies**.
