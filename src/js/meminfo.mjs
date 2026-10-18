@@ -8,7 +8,7 @@
 
 //
 const
-	VERSION = '2.2.2';
+	VERSION = '2.2.3';
 
 const
 	DEFAULT_BASE = 1024,
@@ -364,12 +364,12 @@ if(!globalThis[kekse1])
 		{
 			const temp = _item.slice(0, -1);
 			
-			if(temp.isNumeric)
+			if(temp.isDecimal)
 			{
 				return BigInt(temp);
 			}
 		}
-		else if(_item.isNumeric)
+		else if(_item.isDecimal)
 		{
 			return Number(_item);
 		}
@@ -408,7 +408,7 @@ if(!globalThis[kekse1])
 		return original;
 	}});
 
-	Reflect.defineProperty(String.prototype, 'isNumeric', { get: function()
+	Reflect.defineProperty(String.prototype, 'isDecimal', { get: function()
 	{
 		var	string = this.valueOf(),
 			hadChar = false,
@@ -722,7 +722,7 @@ meminfo.getParameters = () => {
 		}
 		else if(process.argv[i][0] === '-' &&
 				process.argv[i][1] &&
-			!process.argv[i][1].isNumeric)
+			!process.argv[i][1].isDecimal)
 		{
 			item = process.argv[i].substr(1);
 			
@@ -754,7 +754,7 @@ meminfo.getParameters = () => {
 						return process.exit(4);
 				}
 				
-				if(item && (item[0] === '-' || item[0] === '@' || item[0] === '=') && !item[1].isNumeric)
+				if(item && (item[0] === '-' || item[0] === '@' || item[0] === '=') && !item[1].isDecimal)
 				{
 					item = '';
 					--i;
@@ -794,7 +794,7 @@ meminfo.getParameters = () => {
 				{
 					key = 'radix';
 					
-					if(!item.isNumeric)
+					if(!item.isDecimal)
 					{
 						item = Boolean.parse(item);
 						
@@ -817,7 +817,7 @@ meminfo.getParameters = () => {
 				}
 				else if(key === 'index')
 				{
-					if(item.isNumeric)
+					if(item.isDecimal)
 					{
 						item = Number(item);
 					}
@@ -827,7 +827,7 @@ meminfo.getParameters = () => {
 						return process.exit(17);
 					}
 				}
-				else if(!item.isNumeric && typeof item !== 'boolean')
+				else if(!item.isDecimal && typeof item !== 'boolean')
 				{
 					console.error('Expecting a numeric value for ' +
 						'parameter `' + process.argv[i - 1] + '`.');
@@ -853,17 +853,17 @@ meminfo.getParameters = () => {
 		}
 		else if(process.argv[i][0] === '@' &&
 				process.argv[i][1] &&
-			(item = process.argv[i].substr(1)).isNumeric)
+			(item = process.argv[i].substr(1)).isDecimal)
 		{
 			result.radix = Number(item);
 		}
 		else if(process.argv[i][0] === '=' &&
 				process.argv[i][1] &&
-			(item = process.argv[i].substr(1)).isNumeric)
+			(item = process.argv[i].substr(1)).isDecimal)
 		{
 			result.base = Number(item);
 		}
-		else if(process.argv[i].isNumeric)
+		else if(process.argv[i].isDecimal)
 		{
 			result.base = Number(process.argv[i]);
 		}
@@ -972,7 +972,7 @@ meminfo.getData = (_errors = true) => {
 			value = value.slice(0, -(DEFAULT_SUFFIX.
 						length)).trim();
 
-			if(value.isNumeric)
+			if(value.isDecimal)
 			{
 				value = Number(value *
 					DEFAULT_FILE_BASE **

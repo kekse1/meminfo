@@ -40,7 +40,7 @@ Will present you your `/proc/meminfo` in a more clean/better way.
 ## Download
 Implemented in plain Vanilla JavaScript, **without any dependencies**.
 
-* [Version v**2.2.2**](./src/js/meminfo.mjs) (updated **2026-09-28**);
+* [Version v**2.2.3**](./src/js/meminfo.mjs) (updated **2026-10-18**);
 
 <br>
 
