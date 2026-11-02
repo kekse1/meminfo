@@ -27,20 +27,10 @@ Will present you your `/proc/meminfo` in a more clean/better way.
 
 <br><br><br>
 
-<!--
-## News
-* \[**2026-09-28**\] Newest version is the v**2.2.2** now.
-* \[**2026-09-28**\] And now here's also the newest [**screenshot** to be found](#example-screenshot);
-* \[**2026-09-17**\] (Re-)Created this utility!
-
-<br><br><br>
-  -->
-<br><br>
-
 ## Download
 Implemented in plain Vanilla JavaScript, **without any dependencies**.
 
-* [Version v**2.2.3**](./src/js/meminfo.mjs) (updated **2026-10-18**);
+* [Version v**2.2.4**](./src/js/meminfo.mjs) (updated **2026-11-02**);
 
 <br>
 

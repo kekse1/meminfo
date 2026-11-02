@@ -8,7 +8,7 @@
 
 //
 const
-	VERSION = '2.2.3';
+	VERSION = '2.2.4';
 
 const
 	DEFAULT_BASE = 1024,
@@ -201,29 +201,7 @@ if(!globalThis[kekse1])
 		}
 
 		rest =	Math.round(rest, _options.precision);
-		var	result;
-
-		if(typeof _options.radix === 'boolean')
-		{
-			if(_options.radix)//&& rest >= 1000; ..
-			{
-				result = rest.toLocaleString();
-			}
-			else
-			{
-				result = rest.toFixed(
-					_options.precision);
-			}
-		}
-		else
-		{
-			result = rest.toString(_options.radix);
-			
-			if(_options.radix !== 10 && _options.show)
-			{
-				result = '(' + _options.radix + ')' + result;
-			}
-		}
+		const	result = Math._toString(rest, _options);
 
 		if(!regularBase)
 		{
@@ -237,6 +215,32 @@ if(!globalThis[kekse1])
 		return ((negative ? '-' : '') + (result +
 			' ' + UNIT[index][_options.base]));
 	}});
+
+	Math._toString = (_value, _options) => {
+		if(_value === 0)
+		{
+			return '0';
+		}
+
+		if(typeof _options.radix === 'boolean')
+		{
+			if(_options.radix)
+			{
+				return _value.toLocaleString();
+			}
+
+			return _value.toFixed(_options.precision);
+		}
+
+		const	result = _value.toString(_options.radix);
+
+		if(_options.radix !== 10 && _options.show)
+		{
+			return ('(' + _options.radix + ')' + result);
+		}
+
+		return result;
+	};
 
 	Math.size.isRegularBase = (_base) => (
 		_base === 1000 || _base === 1024);
@@ -579,6 +583,12 @@ meminfo.size = (_value, _options = ARGS) => Math.
 			spaces: DEFAULT_SPACES,
 			index: null,
 			unit: null
+		}, _options));
+meminfo.toString = (_value, _options = ARGS) => Math.
+	_toString(_value, Object.assign({
+			precision: DEFAULT_PRECISION,
+			radix: DEFAULT_RADIX,
+			show: DEFAULT_SHOW
 		}, _options));
 
 //
@@ -977,8 +987,14 @@ meminfo.getData = (_errors = true) => {
 				value = Number(value *
 					DEFAULT_FILE_BASE **
 					DEFAULT_FILE_POW);
-				value = meminfo.size(value, ARGS);
+				value = meminfo.size(
+					value, ARGS);
 			}
+		}
+		else if(value && value.isDecimal)
+		{
+			value = meminfo.toString(
+				value, ARGS);
 		}
 		
 		result[key] = value;
