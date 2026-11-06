@@ -2,7 +2,7 @@
 
 # 
 # Copyright (c) Sebastian Kucharczyk <kuchen@kekse.biz>
-# https://kekse.biz/ https://github.com/kekse1/mem/
+# https://kekse.biz/ https://github.com/kekse1/meminfo/
 # v2.0.0
 #
 #
